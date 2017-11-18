@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  if !user
+    div(class="row align-items-center")
+      div(class="col-6 mx-auto col-md-6 order-md-2")
+        img(src="/img/mikan.png" alt="TODO:画像を用意" class="img-fluid mb-3 mb-md-0")
+      div(class="col-md-6 order-md-1 text-center text-md-left pr-md-5")
+        h1(class="mb-3 bd-text-purple-bright")=title
+        p(class="lead") #{title} は各種SNSでの認証で、みかんを数えられるアプリです。
+          br
+          span お問い合わせは
+            a(href="https://twitter.com/y_takewell") takewell
+          span まで
+        div(class="d-flex flex-column flex-md-row lead mb-3")
+          a(class="btn btn-primary btn-lg" href="/login" role="button") 登録する
+    div(class="masthead-followup row m-0 border border-white")
+      div(class="col-12 col-md-4 p-3 p-md-5 bg-light border border-white")
+        h3 SNS 認証
+        p ご利用なさっている SNS で認証が可能です。ご要望に応じて認証できるサービスも追加していく予定です。
+      div(class="col-12 col-md-4 p-3 p-md-5 bg-light border border-white")
+        h3 みかんをカウントする
+        p  一日に食べたみかんを記録できます。
+      div(class="col-12 col-md-4 p-3 p-md-5 bg-light border border-white")
+        span(class="badge badge-pill badge-info") リリース予定
+        h3 ランキング機能
+        p 日本最強のみかん消費者になろう
+
+
+  if user
+    br
+    h3 まだみかんを数えていません。
