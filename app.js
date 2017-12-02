@@ -7,25 +7,10 @@ const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const session = require('express-session');
 const passport = require('passport');
-
-// Moduels 
-const User = require('./models/user');
-const Mikan = require('./models/mikan');
-
-
-User.sync().then(() => {
-  Mikan.belongsTo(User, { foreignKey: 'createdBy' });
-  Mikan.sync();
-});
-
+const mongoose = require('mongoose');
 const app = express();
 
 app.use(helmet());
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'pug');
-
 // TODO: favicon
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', '/img/scheduler-favicon.png')));
@@ -34,18 +19,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 // express-session と passport でセッションを利用
 app.use(session({ secret: '468f60563eec98a0', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Moduels 
+const User = require('./models/user');
+const Mikan = require('./models/mikan');
+
+mongoose.connect('mongodb://localhost/mikancounter', (err) => {
+  if (err) console.log(err);
+  else {
+    console.log('succcessfully connected to MongoDB');
+  }
+});
+
+// View
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 // Control
 const index = require('./routes/index');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const auth = require('./routes/auth');
-
 app.use('/', index);
 app.use('/login', login);
 app.use('/logout', logout);

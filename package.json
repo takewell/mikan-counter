@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
+    "build": "webpack",
     "test": "node_modules/.bin/mocha"
   },
   "dependencies": {
@@ -18,6 +19,7 @@
     "jade": "~1.11.0",
     "jquery": "^3.2.1",
     "moment-timezone": "^0.5.0",
+    "mongoose": "^4.13.4",
     "morgan": "~1.6.1",
     "node-uuid": "^1.4.7",
     "passport": "^0.3.2",
@@ -27,14 +29,19 @@
     "pg": "^6.1.0",
     "pg-hstore": "^2.3.2",
     "pug": "^2.0.0-rc.4",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
     "sequelize": "^3.25.0",
-    "serve-favicon": "~2.3.0",
-    "webpack": "^3.6.0"
+    "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "mocha": "^2.4.5",
     "passport-stub": "^1.1.1",
     "supertest": "^1.2.0",
-    "webpack": "^2.3.2"
+    "webpack": "^3.8.1"
   }
 }

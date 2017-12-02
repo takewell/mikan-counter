@@ -21,16 +21,7 @@ router.get('/github', passport.authenticate('github', { scope: ['user:email'] })
 router.get('/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   (req, res) => {
-    var loginFrom = req.cookies.loginFrom;
-        // オープンリダイレクタ脆弱性対策
-        if (loginFrom &&
-         loginFrom.indexOf('http://') < 0 &&
-         loginFrom.indexOf('https://') < 0) {
-          res.clearCookie('loginFrom');
-          res.redirect(loginFrom);
-        } else {
-          res.redirect('/');
-        }
+    authRedirect(req, res);
   });
 
 facebookAuth();
@@ -41,16 +32,7 @@ router.get('/facebook',
 router.get('/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
   (req, res) => {
-    var loginFrom = req.cookies.loginFrom;
-    // オープンリダイレクタ脆弱性対策
-    if (loginFrom &&
-     loginFrom.indexOf('http://') < 0 &&
-     loginFrom.indexOf('https://') < 0) {
-      res.clearCookie('loginFrom');
-      res.redirect(loginFrom);
-    } else {
-      res.redirect('/');
-    }
+    authRedirect(req, res);
   });
 
 twitterAuth();
@@ -61,6 +43,10 @@ router.get('/twitter',
 router.get('/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   (req, res) => {
+    authRedirect(req, res);
+  });
+
+function authRedirect(req, res) {
     var loginFrom = req.cookies.loginFrom;
     // オープンリダイレクタ脆弱性対策
     if (loginFrom &&
@@ -71,7 +57,7 @@ router.get('/twitter/callback',
     } else {
       res.redirect('/');
     }
-  });
+}
 
 function githubAuth() {
   handleSession();
@@ -82,12 +68,13 @@ function githubAuth() {
     },
     (accessToken, refreshToken, profile, done) => {
       process.nextTick(() => {
-        User.upsert({
+        const newUser = new User({
           userId: profile.id,
           username: profile.username
-        }).then(() => {
-          done(null, profile);
         });
+        // 重複を避けるための処理を書きたいが今は手当たり次第に保存している。
+        newUser.save();
+        done(null, profile);
       });
     }
   ));
@@ -102,12 +89,13 @@ function facebookAuth() {
     },
     (accessToken, refreshToken, profile, done) => {
       process.nextTick(() => {
-        User.upsert({
+        const newUser = new User({
           userId: profile.id,
           username: profile.displayName
-        }).then(() => {
-          done(null, profile);
         });
+        // 重複を避けるための処理を書きたい
+        newUser.save();
+        done(null, profile);
       });
     }
   ));
@@ -123,12 +111,13 @@ function twitterAuth() {
     },
     (accessToken, refreshToken, profile, done) => {
       process.nextTick(() => {
-        User.upsert({
+        const newUser = new User({
           userId: profile.id,
           username: profile.username
-        }).then(() => {
-          done(null, profile);
         });
+        // 重複を避けるための処理を書きたい
+        newUser.save();
+        done(null, profile);
       });
     }
   ));

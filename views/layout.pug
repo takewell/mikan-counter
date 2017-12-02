@@ -10,9 +10,9 @@ html
     link(rel="stylesheet", href="/stylesheets/style.css")
 
   body
-    nav(class="navbar navbar-dark bg-dark")
+    nav(class="navbar navbar-dark" style="background-color:#eb7a00;")
       div(class="navbar-header")
-        a(class="navbar-brand btn btn-outline-secondary" href="/") Mikan Counter
+        a(class="navbar-brand btn" href="/") Mikan Counter
       ul(class="nav nav-pills")
         if user
           li.nav-item
@@ -25,7 +25,7 @@ html
                 a(class="btn btn-outline-success" href="/logout") #{user.username} をログアウト
         else
           li.nav-item
-            a(class="btn btn-outline-success" href="/login") ログイン
+            a(class="btn" style="color:#fff" href="/login") ログイン
     div(class="container")
       block content
     script(src="/javascripts/bundle.js")
