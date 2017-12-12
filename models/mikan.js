@@ -9,7 +9,7 @@ const Mikan = loader.database.define(
       primaryKey: true,
       allowNull: false
     },
-    mikanCount: {
+    count: {
       type: Sequelize.INTEGER,
       allowNull: false
     },
