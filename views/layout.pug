@@ -18,11 +18,11 @@ html
           li.nav-item
             case user.provider
               when "facebook"
-                a(class="btn btn-outline-success" href="/logout") #{user.displayName} をログアウト
+                a(class="btn" style="color:#fff;" href="/logout") #{user.displayName} をログアウト
               when "twitter"
-                a(class="btn btn-outline-success" href="/logout") #{user.username} をログアウト
+                a(class="btn" style="background-color:#eb7a00;" href="/logout") #{user.username} をログアウト
               when "github"
-                a(class="btn btn-outline-success" href="/logout") #{user.username} をログアウト
+                a(class="btn" style="color:#fff;" href="/logout") #{user.username} をログアウト
         else
           li.nav-item
             a(class="btn" style="color:#fff" href="/login") ログイン

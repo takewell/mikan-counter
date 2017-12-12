@@ -1,13 +1,12 @@
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
+// const favicon = require('serve-favicon')
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const session = require('express-session');
 const passport = require('passport');
-const mongoose = require('mongoose');
 const app = express();
 
 app.use(helmet());
@@ -24,15 +23,13 @@ app.use(session({ secret: '468f60563eec98a0', resave: false, saveUninitialized: 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Moduels 
+// Moduels
 const User = require('./models/user');
 const Mikan = require('./models/mikan');
 
-mongoose.connect('mongodb://localhost/mikancounter', (err) => {
-  if (err) console.log(err);
-  else {
-    console.log('succcessfully connected to MongoDB');
-  }
+User.sync().then(() => {
+  Mikan.belongsTo(User, { foreignKey: 'createdBy' });
+  Mikan.sync();
 });
 
 // View
@@ -44,10 +41,12 @@ const index = require('./routes/index');
 const login = require('./routes/login');
 const logout = require('./routes/logout');
 const auth = require('./routes/auth');
+const api = require('./routes/api');
 app.use('/', index);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/auth', auth);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

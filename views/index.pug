@@ -2,16 +2,13 @@ extends layout
 
 block content
   br
-  if !users
+  if !user
     h1=title
 
-  if users
-    br
-    h3 みかんを数えましょう！！！
-    section
-      each user in users
-        div
-          h2 #{user.username}
-          h3 #{user.userId}
-          time #{user.date}
-  div#app
+  if user
+    div.mx-auto.text-center
+      br
+      div
+        h3 みかんを数えましょう！！！
+      br
+      div#app

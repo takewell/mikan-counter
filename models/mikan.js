@@ -1,13 +1,35 @@
-'use strict';
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const loader = require('./sequelize-loader');
+const Sequelize = loader.Sequelize;
 
-const mikanSchema = new Schema({
-  userId: Number,
-  username: String,
-  mikanCount: Number,
-  // ここは日付のみで良い
-  date: {type: Date, default: new Date()},
-});
+const Mikan = loader.database.define(
+  'mikan',
+  {
+    mikanId: {
+      type: Sequelize.UUID,
+      primaryKey: true,
+      allowNull: false
+    },
+    mikanCount: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
+    memo: {
+      type: Sequelize.TEXT,
+      allowNull: true
+    },
+    createdBy: {
+      type: Sequelize.BIGINT,
+      allowNull: false
+    },
+    updatedAt: {
+      type: Sequelize.DATE,
+      allowNull: false
+    }
+  },
+  {
+    freezeTableName: true,
+    timestamps: false
+  }
+);
 
-module.exports = mongoose.model('Mikan', mikanSchema)
+module.exports = Mikan;

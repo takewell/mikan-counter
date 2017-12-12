@@ -1,46 +1,81 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+// import request from 'superagent'
+import ChartCanvas from './ChartCanvas';
 
-class CounterApp extends React.Component {
+class Counter extends Component {
   constructor(props) {
     super(props);
     this.state = {
       count: 0
     };
-    this.countUp = this.countUp.bind(this);
-    this.unDo = this.unDo.bind(this);
-    this.reSet = this.reSet.bind(this);
   }
-  countUp() {
+
+  countUp(e) {
     this.setState({
       count: this.state.count + 1
     });
   }
-  unDo() {
+
+  unDo(e) {
     if (this.state.count > 0) {
       this.setState({
         count: this.state.count - 1
       });
     }
   }
-  reSet() {
+
+  reSet(e) {
     this.setState({
       count: 0
     });
+  }
+
+  bodyChanged(e) {
+    this.setState({ body: e.target.value });
+  }
+
+  post(e) {
+    request
+      .get('/api/count')
+      .query({
+        count: this.state.count
+      })
+      .end((err, data) => {
+        if (err) {
+          console.error(err);
+        }
+      });
   }
   render() {
     return (
       <div>
         <p>counter: {this.state.count}</p>
-        <button onClick={this.countUp}>カウント</button>
-        <button onClick={this.unDo}>戻る</button>
-        <button onClick={this.reSet}>リセット</button>
+        <button onClick={e => this.reSet(e)}>リセット</button>
+        <button onClick={e => this.countUp(e)}>カウント</button>
+        <button onClick={e => this.unDo(e)}>戻る</button>
+        <br />
+        <input type="text" value={this.state.body} size="60" onChange={e => this.bodyChanged(e)} />
+        <br />
+        <button onClick={e => this.post()}>投稿</button>
       </div>
     );
   }
 }
 
-ReactDOM.render( 
-  <CounterApp /> ,
-  document.getElementById('app')
-);
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  render() {
+    return (
+      <div>
+        <Counter />
+        <ChartCanvas />
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<App />, document.getElementById('app'));

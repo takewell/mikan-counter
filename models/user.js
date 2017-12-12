@@ -1,12 +1,23 @@
-// mongoDB をやめるかもしれない
-'use strict';
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const loader = require('./sequelize-loader');
+const Sequelize = loader.Sequelize;
 
-const userSchema = new Schema({
-  userId: Number,
-  username: String,
-  date: {type: Date, default: new Date()}
-});
+const User = loader.database.define(
+  'users',
+  {
+    userId: {
+      type: Sequelize.BIGINT,
+      primaryKey: true,
+      allowNull: false
+    },
+    username: {
+      type: Sequelize.STRING,
+      allowNull: false
+    }
+  },
+  {
+    freezeTableName: true,
+    timestamps: false
+  }
+);
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = User;
