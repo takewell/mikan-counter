@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import request from 'superagent'
+import request from 'superagent';
 export default class Counter extends Component {
   constructor(props) {
     super(props);
@@ -32,18 +32,21 @@ export default class Counter extends Component {
     this.setState({ body: e.target.value });
   }
 
-  // post(e) {
-  //   request
-  //     .get('/api/count')
-  //     .query({
-  //       count: this.state.count
-  //     })
-  //     .end((err, data) => {
-  //       if (err) {
-  //         console.error(err);
-  //       }
-  //     });
-  // }
+  post(e) {
+    request
+      .get('/api/countmikan')
+      .query({
+        count: this.state.count,
+        body: this.state.body
+      })
+      .end((err, data) => {
+        if (err) {
+          console.error(err);
+        }
+        this.setState({ memo: '' });
+        // TODO 値をリセットしたらページに新しいデータを反映させるためのコードを記述する
+      });
+  }
 
   render() {
     return (
