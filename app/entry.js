@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import request from 'superagent';
 import Counter from './Counter';
-import ChartCanvas from './ChartCanvas';
 
 class Console extends Component {
   constructor(props) {
@@ -53,7 +52,6 @@ class App extends Component {
     return (
       <div>
         <Counter />
-        <ChartCanvas />
       </div>
     );
   }
