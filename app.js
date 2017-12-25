@@ -46,7 +46,7 @@ app.use('/', index);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/auth', auth);
-// app.use('/api', api);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
