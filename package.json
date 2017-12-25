@@ -34,7 +34,7 @@
     "react-dom": "^16.1.1",
     "sequelize": "^3.25.0",
     "serve-favicon": "~2.3.0",
-    "superagent": "^3.8.1"
+    "superagent": "^3.8.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
