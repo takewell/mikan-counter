@@ -5,7 +5,7 @@ const Mikan = loader.database.define(
   'mikan',
   {
     mikanId: {
-      type: Sequelize.UUID,
+      type: Sequelize.BIGINT,
       primaryKey: true,
       allowNull: false
     },
@@ -13,7 +13,7 @@ const Mikan = loader.database.define(
       type: Sequelize.INTEGER,
       allowNull: false
     },
-    memo: {
+    body: {
       type: Sequelize.TEXT,
       allowNull: true
     },
