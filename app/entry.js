@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import request from 'superagent';
 import Counter from './Counter';
+import DropdownLogin from './DropdownLogin';
 
 class Console extends Component {
   constructor(props) {
@@ -52,9 +53,14 @@ class App extends Component {
     return (
       <div>
         <Counter />
+        <Console />
       </div>
     );
   }
 }
+
+if (document.getElementById('dropdown')) {
+  ReactDOM.render(<DropdownLogin />, document.getElementById('dropdown'));
+};
 
 ReactDOM.render(<App />, document.getElementById('app'));

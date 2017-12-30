@@ -10,7 +10,8 @@ html
     link(rel="stylesheet", href="/stylesheets/style.css")
 
   body
-    nav(class="navbar navbar-dark" style="background-color:#eb7a00;")
+    //- script(src="/javascripts/bundle.js")
+    nav(class="navbar navbar-dark" style="background: linear-gradient(90deg, #fb7742 , #f9d423);")
       div(class="navbar-header")
         a(class="navbar-brand btn" href="/") Mikan Counter
       ul(class="nav nav-pills")
@@ -18,14 +19,15 @@ html
           li.nav-item
             case user.provider
               when "facebook"
-                a(class="btn" style="color:#fff;" href="/logout") #{user.displayName} をログアウト
+                a(class="btn" style="color:#32ab45;" href="/logout") #{user.displayName} をログアウト
               when "twitter"
-                a(class="btn" style="background-color:#eb7a00;" href="/logout") #{user.username} をログアウト
+                a(class="btn" style="color:#32ab45" href="/logout") #{user.username} をログアウト
               when "github"
-                a(class="btn" style="color:#fff;" href="/logout") #{user.username} をログアウト
+                a(class="btn" style="color:#32ab45;" href="/logout") #{user.username} をログアウト
         else
           li.nav-item
-            a(class="btn" style="color:#fff" href="/login") ログイン
+            div#dropdown
+
     div(class="container")
       block content
-    script(src="/javascripts/bundle.js")
+      script(src="/javascripts/bundle.js")

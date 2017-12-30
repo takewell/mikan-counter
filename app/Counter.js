@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import request from 'superagent';
+
 export default class Counter extends Component {
   constructor(props) {
     super(props);
@@ -52,14 +53,11 @@ export default class Counter extends Component {
     return (
       <div>
         <p>counter: {this.state.count}</p>
-        <button onClick={e => this.reSet(e)}>リセット</button>
-        <button onClick={e => this.countUp(e)}>カウント</button>
-        <button onClick={e => this.unDo(e)}>戻る</button>
+        <button onClick={e => this.reSet(e)} >リセット</button>
+        <button onClick={e => this.countUp(e)} >カウント</button>
+        <button onClick={e => this.unDo(e)} >戻る</button>
         <br />
-        <br />
-        <br />
-        <textarea row="10" cols="30" value={this.state.body} onChange={e => this.bodyChanged(e)} />
-        <br />
+        <textarea row="10" cols="30" value={this.state.body} onChange={e => this.bodyChanged(e)} className="form-group form-control" />
         <br />
         <button onClick={e => this.post()}>投稿</button>
       </div>
