@@ -5,7 +5,7 @@ const Mikan = loader.database.define(
   'mikan',
   {
     mikanId: {
-      type: Sequelize.BIGINT,
+      type: Sequelize.STRING,
       primaryKey: true,
       allowNull: false
     },

@@ -3,14 +3,24 @@ extends layout
 block content
   br
   if !user
-    h1=title
+    div(class="row align-items-center")
+      div(class="col-6 mx-auto col-md-6 order-md-2")
+        img(src="/img/logo.png" alt="" class="img-fluid mb-3 mb-md-0")
+      div(class="col-md-6 order-md-1 text-center text-md-left pr-md-5")
+        h2
+          span(style="color:#fb7742;") Mikan Counter
+        p Mikan Counter は人類がもっとみかんを消費するために作られた WEB アプリケーションです。毎日記録をつけることによってみかんを食べるという行為が習慣化し、感謝するようになります。
+        span お問い合わせは
+          a(href="https://twitter.com/y_takewell") takewell
+        span まで
+        br
+        span(style="color:#e62d8c") ※現在ベータ版のためログインしていてもデータが消えてしまったりする可能性があります。<br>あらかじめご了承ください。<br>
+        div(class="flex-column flex-md-row mb-3")
+          a(class="btn btn-success btn-lg" href="/login" role="button") 登録する
+    div(class="mx-auto text-center")
+      div#preapp
 
   if user
     div(class="mx-auto text-center")
-      br
-      div
-        h1 Mikan Count
-        button
-          img(src="/img/logo.png", alt="" style="width:200px;")
       br
       div#app

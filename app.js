@@ -40,11 +40,13 @@ const login = require('./routes/login');
 const logout = require('./routes/logout');
 const auth = require('./routes/auth');
 const api = require('./routes/api');
+const list = require('./routes/list');
 app.use('/', index);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/auth', auth);
 app.use('/api', api);
+app.use('/list', list);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

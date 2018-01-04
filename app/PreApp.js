@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import request from 'superagent';
-import { Button } from 'reactstrap';
+import ReactDOM from 'react-dom';
+import { Button, Form, Table } from 'reactstrap';
 
-export default class Counter extends Component {
+export default class PreApp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      count: 0
+      count: 0,
+      items: []
     };
+  }
+
+  printMikan(c) {
+    let m = '';
+    for (let i = 0; i < c; i++) {
+      m += '🍊';
+    }
+    return m;
   }
 
   countUp(e) {
@@ -35,22 +44,21 @@ export default class Counter extends Component {
   }
 
   post(e) {
-    request
-      .get('/api/countmikan')
-      .query({
-        count: this.state.count,
-        body: this.state.body
-      })
-      .end((err, data) => {
-        if (err) {
-          console.error(err);
-        }
-        this.setState({ memo: '' });
-        // TODO 値をリセットしたらページに新しいデータを反映させるためのコードを記述する
-      });
-  }
+    this.setState({ items: [{ count: this.state.count, body: this.state.body }] });
+  };
 
   render() {
+    const date = new Date();
+    const m = (date.getMonth() + 1).toString();
+    const d = date.getDate().toString();
+    const html = this.state.items.map(e => (
+      <tr>
+        <th scope="row">{m + '/' + d}</th>
+        <th>{this.printMikan(e.count)}</th>
+        <th>{e.body}</th>
+      </tr>
+    ));
+
     return (
       <div>
         <h2 className="counter">{this.state.count}</h2>
@@ -62,6 +70,18 @@ export default class Counter extends Component {
         <textarea row="10" cols="30" value={this.state.body} onChange={e => this.bodyChanged(e)} className="form-group form-control textfrom" />
         <Button color="success" onClick={e => this.post()}>投稿</Button>
         <br />
+        <Table>
+          <thead>
+            <tr>
+              <th>日付</th>
+              <th>みかん</th>
+              <th>メッセージ</th>
+            </tr>
+          </thead>
+          <tbody>
+            {html}
+          </tbody>
+        </Table>
       </div >
     );
   }

@@ -1,11 +1,9 @@
 {
-  "name": "scheduler",
-  "description": "scheduler",
+  "name": "mikancounter",
+  "description": "みかんを数えるアプリ",
   "logo": "",
-  "keywords": ["node"],
+  "keywords": [
+    "node"
+  ],
   "image": "heroku/nodejs"
-},
- "engines": {
-    "node": "6.11.1"
-   }
 }

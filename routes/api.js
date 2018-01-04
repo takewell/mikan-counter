@@ -8,6 +8,8 @@ router.get('/countmikan', (req, res) => {
   const m = (date.getMonth() + 1).toString();
   const d = date.getDate().toString();
   const mikanId = parseInt(y + m + d + req.user.id.toString());
+  console.log(y + m + d);
+  console.log(req.user.id.toString());
   console.log(mikanId);
   const q = req.query;
   console.log(req.query);
@@ -39,10 +41,10 @@ router.get('/getMikan', (req, res, next) => {
   }
 });
 
-function sendJSON(res, result, obj) {
+const sendJSON = (res, result, obj) => {
   obj['result'] = result;
   res.json(obj);
-}
+};
 
 
 module.exports = router;

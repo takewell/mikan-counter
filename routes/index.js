@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
   const title = 'Mikan Counter';
-  res.render('index', { title: title, user: req.user });
+  res.render('index', { user: req.user });
 });
 
 module.exports = router;

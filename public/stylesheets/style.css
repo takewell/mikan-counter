@@ -13,3 +13,7 @@ a {
 .countup {
   background-image: url("../img/logo.png")
 }
+
+.counter {
+  color:#fb7742;
+}
