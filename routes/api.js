@@ -7,7 +7,7 @@ router.get('/countmikan', (req, res) => {
   const y = date.getFullYear().toString();
   const m = (date.getMonth() + 1).toString();
   const d = date.getDate().toString();
-  const mikanId = parseInt(y + m + d + req.user.id.toString());
+  const mikanId = y + m + d + req.user.id.toString();
   console.log(y + m + d);
   console.log(req.user.id.toString());
   console.log(mikanId);
