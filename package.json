@@ -1,6 +1,6 @@
 {
-  "name": "schedule-arranger",
-  "version": "0.0.0",
+  "name": "mikan-counter",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
